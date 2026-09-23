@@ -1,10 +1,13 @@
 name: Build APK with Docker
 
-on: [push, workflow_dispatch]
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     container:
       image: kivy/buildozer
 
@@ -14,7 +17,7 @@ jobs:
 
       - name: Build APK
         run: |
-          buildozer android debug
+          buildozer android debug --allow-root
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
